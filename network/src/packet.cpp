@@ -46,23 +46,14 @@ int Packet::parse(const unsigned char *buf, pcap_pkthdr &hdr)
 
     tcp_hdr = (tcphdr*) buf;
 
-	printf("parse srcip\n");
     srcip = ip_hdr->ip_src;
-	printf("parse dstip\n");
     dstip = ip_hdr->ip_dst;
-	printf("parse sport\n");
     sport = ntohs(tcp_hdr->source);
-	printf("parse dport\n");
     dport = ntohs(tcp_hdr->dest);
-	printf("parse prot\n");
     prot = ip_hdr->ip_p;
-	printf("parse ipid\n");
     ipid = ntohs(ip_hdr->ip_id);
-	printf("parse seq\n");
 	seq = ntohl(tcp_hdr->seq);
-	printf("parse ack\n");
 	ack = ntohl(tcp_hdr->ack_seq);
-	printf("parse size\n");
     size = hdr.len;
 
     return 0;
