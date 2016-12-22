@@ -46,12 +46,23 @@ int Packet::parse(const unsigned char *buf, pcap_pkthdr &hdr)
 
     tcp_hdr = (tcphdr*) buf;
 
+	printf("parse srcip\n");
     srcip = ip_hdr->ip_src;
+	printf("parse dstip\n");
     dstip = ip_hdr->ip_dst;
+	printf("parse sport\n");
     sport = ntohs(tcp_hdr->source);
+	printf("parse dport\n");
     dport = ntohs(tcp_hdr->dest);
+	printf("parse prot\n");
     prot = ip_hdr->ip_p;
+	printf("parse ipid\n");
     ipid = ntohs(ip_hdr->ip_id);
+	printf("parse seq\n");
+	seq = ntohl(tcp_hdr->seq);
+	printf("parse ack\n");
+	ack = ntohl(tcp_hdr->ack_seq);
+	printf("parse size\n");
     size = hdr.len;
 
     return 0;
@@ -78,17 +89,17 @@ void Packet::deserialize(Deserializer &des){
 }
 
 string Packet::to_str() const{
-    char buf[60];
-    sprintf(buf, "%d,%d,%d,%d,%d,%d", srcip.s_addr, dstip.s_addr, sport, dport, prot, ipid);
+    char buf[200];
+    sprintf(buf, "%u,%u,%u,%u,%u,%u,%u,%u", srcip.s_addr, dstip.s_addr, sport, dport, prot, ipid, seq, ack);
     return buf;
 }
 
 string Packet::to_readable() const{
-    char buf[60];
+    char buf[200];
     int len = 0;
-    len += sprintf(buf + len, " %s", inet_ntoa(srcip));
+    len += sprintf(buf + len, "%s", inet_ntoa(srcip));
     len += sprintf(buf + len, " %s", inet_ntoa(dstip));
-    sprintf(buf + len, " %d %d %d %d %d", sport, dport, prot, ipid, size);
+    sprintf(buf + len, " %d %d %d %d %d %u %u", sport, dport, prot, ipid, size, seq, ack);
     return buf;
 }
 string Packet::get_flow_id() const{

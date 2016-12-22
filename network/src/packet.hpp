@@ -19,6 +19,8 @@ public:
     uint16_t sport, dport;
     uint8_t prot; 
     uint16_t ipid;
+	uint32_t seq;
+	uint32_t ack;
     uint32_t size;
 
 	int parse(const unsigned char *packet, pcap_pkthdr &hdr);

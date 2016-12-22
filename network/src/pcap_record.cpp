@@ -19,7 +19,7 @@ string PcapRecord::to_str() const{
 }
 
 string PcapRecord::to_readable() const {
-	return to_string(ts.tv_sec) + "." + to_string(ts.tv_usec) + "," + packet.to_readable();
+	return to_string(ts.tv_sec) + "." + to_string(ts.tv_usec) + " " + packet.to_readable();
 }
 
 } /* namespace bright_lib */
