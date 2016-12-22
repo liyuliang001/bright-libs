@@ -66,6 +66,8 @@ void Packet::serialize(Serializer &ser) const {
     ser.serialize(dport);
     ser.serialize(prot);
     ser.serialize(ipid);
+	ser.serialize(seq);
+	ser.serialize(ack);
     ser.serialize(size);
 }
 
@@ -76,6 +78,8 @@ void Packet::deserialize(Deserializer &des){
     des.deserialize(dport);
     des.deserialize(prot);
     des.deserialize(ipid);
+	des.deserialize(seq);
+	des.deserialize(ack);
     des.deserialize(size);
 }
 
