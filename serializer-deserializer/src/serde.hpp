@@ -5,6 +5,8 @@
 #include <cstdio>
 #include <stdint.h>
 
+namespace bright_lib{
+
 class Serializer{
 public:
     FILE* file;
@@ -49,5 +51,7 @@ public:
     void deserialize(std::string &s);
     void deserialize(timeval &t);
 };
+
+} /* namespace bright_lib */
 
 #endif /* SERDE_HPP */

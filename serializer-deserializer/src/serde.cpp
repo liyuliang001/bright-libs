@@ -1,5 +1,7 @@
 #include "serde.hpp"
 
+namespace bright_lib{
+
 /* Serializer */
 Serializer::Serializer(){
     file = NULL;
@@ -97,3 +99,5 @@ void Deserializer::deserialize(timeval &t){
     deserialize(t.tv_sec);
     deserialize(t.tv_usec);
 }
+
+} /* namespace bright_lib */
