@@ -22,6 +22,8 @@ public:
 	uint32_t seq;
 	uint32_t ack;
     uint32_t size;
+	uint8_t flags;
+	uint16_t dsize;
 
 	int parse(const unsigned char *packet, pcap_pkthdr &hdr);
     void serialize(Serializer &ser) const;
