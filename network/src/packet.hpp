@@ -15,23 +15,24 @@ namespace bright_lib{
  */
 class Packet{
 public:
-    in_addr srcip, dstip;
-    uint16_t sport, dport;
-    uint8_t prot; 
-    uint16_t ipid;
+	in_addr srcip, dstip;
+	uint32_t sip, dip;
+	uint16_t sport, dport;
+	uint8_t prot; 
+	uint16_t ipid;
 	uint32_t seq;
 	uint32_t ack;
-    uint32_t size;
+	uint32_t size;
 	uint8_t flags;
 	uint16_t dsize;
 
 	int parse(const unsigned char *packet, pcap_pkthdr &hdr);
-    void serialize(Serializer &ser) const;
-    void deserialize(Deserializer &des);
-    std::string to_str() const;
-    std::string to_readable() const;
-    std::string get_flow_id() const;
-    std::string str_srcip() const;
+	void serialize(Serializer &ser) const;
+	void deserialize(Deserializer &des);
+	std::string to_str() const;
+	std::string to_readable() const;
+	std::string get_flow_id() const;
+	std::string str_srcip() const;
 };
 
 } /* namespace bright_lib */
