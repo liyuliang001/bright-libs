@@ -1,3 +1,5 @@
+#include <cstdlib>
+#include <fstream>
 #include "figure.hpp"
 using namespace std;
 
@@ -49,6 +51,7 @@ Curve* Figure::AddCurve(int xCol, int yCol){
 string Figure::GetScript(){
 	string res = "";
 	res += "set terminal pdfcairo font \"Gill Sans,9\" linewidth 4 rounded fontscale 1.0\n";
+	res += "set termoption dashed\n";
 	res += "set style line 80 lt rgb \"#808080\"\n";
 	res += "set style line 81 lt 0  # dashed\n";
 	res += "set style line 81 lt rgb \"#808080\"  # grey\n";
@@ -80,5 +83,21 @@ string Figure::GetScript(){
 	return res;
 }
 
+void Figure::Plot(string scriptName){
+	ofstream fout;
+	if (scriptName == ""){
+		scriptName = "figure_cpp.gp";
+		fout.open(scriptName);
+		fout << GetScript() << endl;
+		fout.close();
+		system(("gnuplot " + scriptName).c_str());
+		remove(scriptName.c_str());
+	}else {
+		fout.open(scriptName);
+		fout << GetScript() << endl;
+		fout.close();
+		system(("gnuplot " + scriptName).c_str());
+	}
+}
 } /* namespace plot */
 } /* namespace bright_lib */

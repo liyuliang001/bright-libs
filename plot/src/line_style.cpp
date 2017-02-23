@@ -7,7 +7,15 @@ namespace plot{
 
 LineStyle::LineStyle()
 	: lt(1), lc(), lw(1.0), pt(1), ps(1.0)
+	, hasLine(true), hasPoint(true)
 {
+}
+
+void LineStyle::SetHasLine(bool _hasLine){
+	hasLine = _hasLine;
+}
+void LineStyle::SetHasPoint(bool _hasPoint){
+	hasPoint = _hasPoint;
 }
 
 void LineStyle::SetLineType(int t){
@@ -22,7 +30,7 @@ void LineStyle::SetLineColor(std::string c){
 	lc.Set(c);
 }
 
-void LineStyle::SetlineWidth(double w){
+void LineStyle::SetLineWidth(double w){
 	lw = w;
 }
 
@@ -35,7 +43,14 @@ void LineStyle::SetPointSize(double s){
 }
 
 string LineStyle::GetScript(){
-	return "lt " + to_string(lt) + " " + lc.GetScript() + " lw " + to_string(lw) + " pt " + to_string(pt) + " ps " + to_string(ps);
+	string res = "";
+	if (hasLine)
+		res += "lt " + to_string(lt) + " " + lc.GetScript() + " lw " + to_string(lw);
+	else  // lc is required for points
+		res += lc.GetScript();
+	if (hasPoint)
+		res += " pt " + to_string(pt) + " ps " + to_string(ps);
+	return res;
 }
 
 } /* namespace plot */

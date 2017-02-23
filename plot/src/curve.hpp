@@ -12,11 +12,14 @@ namespace plot{
 class Curve: public BaseType{
 	public:
 		int xCol, yCol;
+		double xScale, yScale;
 		std::string dataFile;
 		std::string title;
 		LineStyle lineStyle;
 		
 		Curve(int _xCol, int _yCol);
+		void SetXScale(double s);
+		void SetYScale(double s);
 		void SetDataFile(std::string _dataFile);
 		void SetTitle(std::string _title);
 		virtual std::string GetScript();

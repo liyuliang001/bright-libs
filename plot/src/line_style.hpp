@@ -13,12 +13,15 @@ class LineStyle{
 		double lw; // line width
 		int pt; // point type
 		double ps; // point size
+		bool hasLine, hasPoint;
 
 		LineStyle();
+		void SetHasLine(bool _hasLine = false);
+		void SetHasPoint(bool _hasPoint = false);
 		void SetLineType(int t);
 		void SetLineColor(int c);
 		void SetLineColor(std::string c);
-		void SetlineWidth(double w);
+		void SetLineWidth(double w);
 		void SetPointType(int t);
 		void SetPointSize(double s);
 		std::string GetScript();

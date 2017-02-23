@@ -32,6 +32,7 @@ class Figure{
 
 		Curve* AddCurve(int xCol, int yCol);
 		std::string GetScript();
+		void Plot(std::string scriptName = "");
 }; /* class Figure */
 
 } /* namespace plot */
