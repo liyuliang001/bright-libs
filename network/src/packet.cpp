@@ -59,6 +59,7 @@ int Packet::parse(const unsigned char *buf, pcap_pkthdr &hdr)
 	flags = tcp_hdr->th_flags;
 	size = hdr.len;
 	dsize = size - sizeof(ether_header) - IP_header_length - tcp_hdr->doff * 4;
+	ip_size = ntohs(ip_hdr->ip_len);
 
 	return 0;
 }
