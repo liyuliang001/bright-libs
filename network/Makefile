@@ -12,9 +12,9 @@ $(BUILD_DIR):
 	mkdir $(BUILD_DIR) 
 $(BUILD_DIR)/packet.o : $(BUILD_DIR) $(SRC_DIR)/packet.hpp $(SRC_DIR)/packet.cpp
 	g++ $(SRC_DIR)/packet.cpp $(CFLAGS) -c -o $(BUILD_DIR)/packet.o
-$(BUILD_DIR)/pcap_record.o : $(BUILD_DIR) $(SRC_DIR)/pcap_record.hpp $(SRC_DIR)/pcap_record.cpp
+$(BUILD_DIR)/pcap_record.o : $(BUILD_DIR) $(SRC_DIR)/pcap_record.hpp $(SRC_DIR)/pcap_record.cpp $(SRC_DIR)/packet.hpp
 	g++ $(SRC_DIR)/pcap_record.cpp $(CFLAGS) -c -o $(BUILD_DIR)/pcap_record.o
-$(BUILD_DIR)/pcap_parser.o : $(BUILD_DIR) $(SRC_DIR)/pcap_parser.hpp $(SRC_DIR)/pcap_parser.cpp
+$(BUILD_DIR)/pcap_parser.o : $(BUILD_DIR) $(SRC_DIR)/pcap_parser.hpp $(SRC_DIR)/pcap_parser.cpp $(SRC_DIR)/packet.hpp $(SRC_DIR)/pcap_record.hpp
 	g++ $(SRC_DIR)/pcap_parser.cpp $(CFLAGS) -c -o $(BUILD_DIR)/pcap_parser.o
 
 $(TARGET_DIR)/libnetwork.a : $(TARGET_DIR) $(BUILD_DIR)/packet.o $(BUILD_DIR)/pcap_record.o $(BUILD_DIR)/pcap_parser.o
@@ -26,3 +26,8 @@ install: $(TARGET_DIR)/libnetwork.a
 	cp $(SRC_DIR)/pcap_record.hpp $(INSTALL_INCLUDE_DIR)/pcap_record.hpp
 	cp $(SRC_DIR)/pcap_parser.hpp $(INSTALL_INCLUDE_DIR)/pcap_parser.hpp
 	cp $(TARGET_DIR)/libnetwork.a $(INSTALL_LIB_DIR)/libnetwork.a
+
+clean:
+	rm -f $(BUILD_DIR)/*
+	rm -f $(TARGET_DIR)/*
+	rm -rf $(INSTALL_INCLUDE_DIR)
