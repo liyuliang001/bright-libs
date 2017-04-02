@@ -3,24 +3,18 @@
 
 #include <stdint.h>
 #include <cstring>
+#include <bright_lib/hash/murmur.h>
 
 namespace bright_lib{
 namespace types{
 
+#define N_U64 ((nbit-1)/64+1)
 template <uint32_t nbit>
 class BigInt{
 public:
-#define N_U64 ((nbit-1)/64+1)
 	uint64_t d[N_U64];
 
-	bool operator==(BigInt<nbit> &b){
-		for (int i = 0; i < N_U64; i++)
-			if (d[i] != b.d[i])
-				return false;
-		return true;
-	}
-
-	int cmp(BigInt<nbit> &b){
+	int cmp(const BigInt<nbit> &b)const {
 		for (int i = N_U64-1; i >= 0; i--){
 			if (d[i] < b.d[i])
 				return -1;
@@ -30,11 +24,17 @@ public:
 		return 0;
 	}
 
-	bool operator<(BigInt<nbit> &b){return cmp(b) == -1;}
-	bool operator<=(BigInt<nbit> &b){return cmp(b) <= 0;}
-	bool operator>(BigInt<nbit> &b){return cmp(b) == 1;}
-	bool operator>=(BigInt<nbit> &b){return cmp(b) >= 0;}
-	BigInt operator<<(int s){
+	BigInt& operator=(uint64_t b){
+		memset(d, 0, sizeof(d));
+		d[0] = b;
+		return *this;
+	}
+	bool operator==(const BigInt<nbit> &b)const {return cmp(b) == 0;}
+	bool operator<(const BigInt<nbit> &b)const {return cmp(b) == -1;}
+	bool operator<=(const BigInt<nbit> &b)const {return cmp(b) <= 0;}
+	bool operator>(const BigInt<nbit> &b)const {return cmp(b) == 1;}
+	bool operator>=(const BigInt<nbit> &b)const {return cmp(b) >= 0;}
+	BigInt operator<<(int s) const {
 		BigInt res;
 		if (s > nbit){
 			memset(res.d, 0, sizeof(res.d));
@@ -54,7 +54,7 @@ public:
 	}
 	BigInt& operator<<=(int s){return ((*this) = (*this) << s);}
 
-	BigInt operator>>(int s){
+	BigInt operator>>(int s)const {
 		BigInt res;
 		if (s > nbit){
 			memset(res.d, 0, sizeof(res.d));
@@ -74,7 +74,7 @@ public:
 	}
 	BigInt& operator>>=(int s){return ((*this) = (*this) >> s);}
 
-	BigInt operator|(uint64_t s){
+	BigInt operator|(uint64_t s)const {
 		BigInt res(*this);
 		res.d[0] |= s;
 		return res;
@@ -84,7 +84,7 @@ public:
 		return *this;
 	}
 
-	BigInt operator&(uint64_t s){
+	BigInt operator&(uint64_t s)const {
 		BigInt res(*this);
 		res.d[0] &= s;
 		return res;
@@ -94,7 +94,7 @@ public:
 		return *this;
 	}
 
-	BigInt operator^(uint64_t s){
+	BigInt operator^(uint64_t s)const {
 		BigInt res(*this);
 		res.d[0] ^= s;
 		return res;
@@ -104,16 +104,26 @@ public:
 		return *this;
 	}
 
-	std::string hex(){
+	std::string hex()const {
 		std::string res(nbit / 4, 0);
 		for (int i = 0; i < N_U64; i++)
 			sprintf(&res[i*16], "%016lx", d[N_U64 - 1 - i]);
 		return res;
 	}
-#undef N_U64
 };
 
 } /* namespace types */
 } /* namespace bright_lib */
+
+namespace std{
+	template<uint32_t nbit>
+	class hash<bright_lib::types::BigInt<nbit> >{
+		public:
+		std::size_t operator()(const bright_lib::types::BigInt<nbit> &b) const {
+			return murmur3_32((const uint8_t*)b.d, N_U64*8, 0);
+		}
+	};
+}
+#undef N_U64
 
 #endif /* BIGINT_HPP */
