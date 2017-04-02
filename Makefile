@@ -5,4 +5,5 @@ install : $(INSTALL_INCLUDE_DIR)
 	make install -C serializer-deserializer
 	make install -C network
 	make install -C plot
+	make install -C hash
 	make install -C types
