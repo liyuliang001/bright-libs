@@ -14,6 +14,9 @@ class BigInt{
 public:
 	uint64_t d[N_U64];
 
+	BigInt(){
+		memset(d, 0, sizeof(d));
+	}
 	int cmp(const BigInt<nbit> &b)const {
 		for (int i = N_U64-1; i >= 0; i--){
 			if (d[i] < b.d[i])
