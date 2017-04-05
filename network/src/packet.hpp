@@ -15,6 +15,7 @@ namespace bright_lib{
  */
 class Packet{
 public:
+	uint8_t dmac[6], smac[6];
 	in_addr srcip, dstip;
 	uint32_t sip, dip;
 	uint16_t sport, dport;

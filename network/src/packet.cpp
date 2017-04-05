@@ -3,6 +3,7 @@
  */
 
 #include <arpa/inet.h>
+#include <cstring>
 #include "packet.hpp"
 using namespace std;
 
@@ -10,6 +11,7 @@ namespace bright_lib{
 int Packet::parse(const unsigned char *buf, pcap_pkthdr &hdr)
 {
 	int caplen = hdr.caplen;
+	ether_header *eth_hdr;
 	ip *ip_hdr;
 	tcphdr *tcp_hdr;
 	unsigned int IP_header_length;
@@ -17,6 +19,8 @@ int Packet::parse(const unsigned char *buf, pcap_pkthdr &hdr)
 	/* For simplicity, we assume Ethernet encapsulation. */
 	if (caplen < sizeof(ether_header))
 		return 1;
+
+	eth_hdr = (ether_header*) buf;
 
 	/* Skip over the Ethernet header. */
 	buf += sizeof(ether_header);
@@ -46,6 +50,8 @@ int Packet::parse(const unsigned char *buf, pcap_pkthdr &hdr)
 
 	tcp_hdr = (tcphdr*) buf;
 
+	memcpy(dmac, eth_hdr->ether_dhost, 6);
+	memcpy(smac, eth_hdr->ether_shost, 6);
 	srcip = ip_hdr->ip_src;
 	dstip = ip_hdr->ip_dst;
 	sip = ntohl(srcip.s_addr);
