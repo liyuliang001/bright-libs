@@ -17,6 +17,7 @@ public:
 
 	Client();
 	int connect(std::string ip, uint16_t port);
+	int close();
 	uint16_t get_local_port();
 
 	int recv_len(char* buf, int len);

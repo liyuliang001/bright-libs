@@ -20,6 +20,13 @@ int Client::connect(std::string ip, uint16_t port){
 	return 0;
 }
 
+int Client::close(){
+	if (sockfd != 0){
+		::close(sockfd);
+		sockfd = 0;
+	}
+}
+
 uint16_t Client::get_local_port(){
 	struct sockaddr_in sin;
 	socklen_t addrlen = sizeof(sin);
@@ -51,8 +58,10 @@ int Client::send_len(char* buf, int len){
 }
 
 Client::~Client(){
-	if (sockfd != 0)
-		close(sockfd);
+	if (sockfd != 0){
+		::close(sockfd);
+		sockfd = 0;
+	}
 }
 
 }
