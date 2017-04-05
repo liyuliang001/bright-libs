@@ -7,3 +7,4 @@ install : $(INSTALL_INCLUDE_DIR)
 	make install -C plot
 	make install -C hash
 	make install -C types
+	make install -C tcp_socket
