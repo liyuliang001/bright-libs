@@ -42,6 +42,12 @@ void Figure::SetYUpper(double yUpper){
 void Figure::SetYLower(double yLower){
 	yRange.SetLower(yLower);
 }
+void Figure::SetXTics(std::string s){
+	xTics = s;
+}
+void Figure::SetYTics(std::string s){
+	yTics = s;
+}
 
 Curve* Figure::AddCurve(int xCol, int yCol){
 	curves.push_back(new Curve(xCol, yCol));
@@ -57,8 +63,8 @@ string Figure::GetScript(){
 	res += "set style line 81 lt rgb \"#808080\"  # grey\n";
 	res += "set grid back linestyle 81\n";
 	res += "set border 0x3 back linestyle 80\n";
-	res += "set xtics nomirror\n";
-	res += "set ytics nomirror\n";
+	res += "set xtics nomirror " + xTics + "\n";
+	res += "set ytics nomirror " + yTics + "\n";
 	res += "\n";
 
 	if (logx)

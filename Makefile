@@ -8,3 +8,4 @@ install : $(INSTALL_INCLUDE_DIR)
 	make install -C hash
 	make install -C types
 	make install -C tcp_socket
+	make install -C skewheap

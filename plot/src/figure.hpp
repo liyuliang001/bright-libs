@@ -17,6 +17,7 @@ class Figure{
 		std::string xLabel, yLabel;
 		std::string legendPos;
 		AxisRange xRange, yRange;
+		std::string xTics, yTics;
 		std::vector<BaseType*> curves;
 
 		Figure();
@@ -29,6 +30,8 @@ class Figure{
 		void SetXLower(double xLower);
 		void SetYUpper(double yUpper);
 		void SetYLower(double yLower);
+		void SetXTics(std::string s);
+		void SetYTics(std::string s);
 
 		Curve* AddCurve(int xCol, int yCol);
 		std::string GetScript();
