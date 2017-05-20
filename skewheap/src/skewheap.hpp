@@ -27,7 +27,7 @@ public:
 	SkewHeapNode<T>* merge(SkewHeapNode<T> *a, SkewHeapNode<T> *b){
 		if (a == NULL) return b;
 		if (b == NULL) return a;
-		if (a->data > b->data){
+		if (b->data < a->data){
 			SkewHeapNode<T> *tmp = a; a = b; b = tmp;
 		}
 		SkewHeapNode<T> *tmp = merge(a->son[1], b);
