@@ -67,7 +67,7 @@ int TcpSocket::recv_len(char* buf, int len){
 ssize_t TcpSocket::send_raw(const char* buf, int len){
 	return ::send(sockfd, buf, len, 0);
 }
-int TcpSocket::send_len(char* buf, int len){
+int TcpSocket::send_len(const char* buf, int len){
 	int ret = 0, cur = 0;
 	while (len > cur && (ret = ::send(sockfd, buf+cur, len-cur, 0)) != -1)
 		cur += ret;

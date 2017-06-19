@@ -45,15 +45,15 @@ public:
 	}
 
 	ssize_t send_raw(const char* buf, int len);
-	int send_len(char* buf, int len);
+	int send_len(const char* buf, int len);
 
 	template<class T> 
-	int send(T &buf){
+	int send(const T &buf){
 		if (send_len((char*)&buf, (int)sizeof(buf)) == -1)
 			return -1;
 		return 0;
 	}
-	int send(std::string &buf){
+	int send(const std::string &buf){
 		int len = buf.size();
 		if (send(len) == -1)
 			return -1;
