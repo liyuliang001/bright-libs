@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <sys/socket.h>
+#include <sys/types.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
@@ -43,7 +44,7 @@ public:
 		return 0;
 	}
 
-	ssize_t send_raw(char* buf, int len);
+	ssize_t send_raw(const char* buf, int len);
 	int send_len(char* buf, int len);
 
 	template<class T> 
@@ -60,6 +61,8 @@ public:
 			return -1;
 		return 0;
 	}
+
+	int set_quickack(int v);
 
 };
 

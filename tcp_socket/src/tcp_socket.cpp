@@ -1,4 +1,5 @@
 #include "tcp_socket.hpp"
+#include <netinet/tcp.h>
 using namespace std;
 
 namespace bright_lib{
@@ -63,7 +64,7 @@ int TcpSocket::recv_len(char* buf, int len){
 	return 0;
 }
 
-ssize_t TcpSocket::send_raw(char* buf, int len){
+ssize_t TcpSocket::send_raw(const char* buf, int len){
 	return ::send(sockfd, buf, len, 0);
 }
 int TcpSocket::send_len(char* buf, int len){
@@ -73,6 +74,10 @@ int TcpSocket::send_len(char* buf, int len){
 	if (ret == -1)
 		return -1;
 	return 0;
+}
+
+int TcpSocket::set_quickack(int v){
+	setsockopt(sockfd, IPPROTO_TCP, TCP_QUICKACK, &v, sizeof(v));
 }
 
 }
