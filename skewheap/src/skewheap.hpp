@@ -68,7 +68,7 @@ public:
 		return res;
 	}
 	T head(){
-		return root->data;
+		return root->son[0]->data;
 	}
 	size_t size(){
 		return n;
