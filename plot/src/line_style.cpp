@@ -30,6 +30,10 @@ void LineStyle::SetLineColor(std::string c){
 	lc.Set(c);
 }
 
+void LineStyle::SetDashType(int t){
+	dt = t;
+}
+
 void LineStyle::SetLineWidth(double w){
 	lw = w;
 }
@@ -45,7 +49,7 @@ void LineStyle::SetPointSize(double s){
 string LineStyle::GetScript(){
 	string res = "";
 	if (hasLine)
-		res += "lt " + to_string(lt) + " " + lc.GetScript() + " lw " + to_string(lw);
+		res += "lt " + to_string(lt) + " " + lc.GetScript() + " dt " + to_string(dt) + " lw " + to_string(lw);
 	else  // lc is required for points
 		res += lc.GetScript();
 	if (hasPoint)

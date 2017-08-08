@@ -10,6 +10,7 @@ class LineStyle{
 	public:
 		int lt; // line type
 		Color lc; // line color
+		int dt; // dath type
 		double lw; // line width
 		int pt; // point type
 		double ps; // point size
@@ -21,6 +22,7 @@ class LineStyle{
 		void SetLineType(int t);
 		void SetLineColor(int c);
 		void SetLineColor(std::string c);
+		void SetDashType(int t);
 		void SetLineWidth(double w);
 		void SetPointType(int t);
 		void SetPointSize(double s);

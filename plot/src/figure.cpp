@@ -61,7 +61,7 @@ string Figure::GetScript(){
 	res += "set style line 80 lt rgb \"#808080\"\n";
 	res += "set style line 81 lt 0  # dashed\n";
 	res += "set style line 81 lt rgb \"#808080\"  # grey\n";
-	res += "set grid back linestyle 81\n";
+	//res += "set grid back linestyle 81\n";
 	res += "set border 0x3 back linestyle 80\n";
 	res += "set xtics nomirror " + xTics + "\n";
 	res += "set ytics nomirror " + yTics + "\n";
