@@ -63,6 +63,7 @@ public:
 	}
 
 	int set_quickack(int v);
+	int set_nodelay(int v);
 
 };
 

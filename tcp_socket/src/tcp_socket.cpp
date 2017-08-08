@@ -80,5 +80,9 @@ int TcpSocket::set_quickack(int v){
 	setsockopt(sockfd, IPPROTO_TCP, TCP_QUICKACK, &v, sizeof(v));
 }
 
+int TcpSocket::set_nodelay(int v){
+	setsockopt(sockfd, IPPROTO_TCP, TCP_NODELAY, &v, sizeof(v));
+}
+
 }
 }
