@@ -9,3 +9,4 @@ install : $(INSTALL_INCLUDE_DIR)
 	make install -C types
 	make install -C tcp_socket
 	make install -C skewheap
+	make install -C stats_util
