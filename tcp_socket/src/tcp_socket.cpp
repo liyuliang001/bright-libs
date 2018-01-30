@@ -57,7 +57,7 @@ ssize_t TcpSocket::recv_raw(char* buf, int len){
 }
 int TcpSocket::recv_len(char* buf, int len){
 	int ret = 0, cur = 0;
-	while (len > cur && (ret = ::recv(sockfd, buf+cur, len-cur, 0)) != -1)
+	while (len > cur && (ret = ::recv(sockfd, buf+cur, len-cur, MSG_WAITALL)) != -1)
 		cur += ret;
 	if (ret == -1)
 		return -1;
