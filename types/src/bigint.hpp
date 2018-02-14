@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <cstring>
+#include <string>
 
 namespace bright_lib{
 namespace types{
