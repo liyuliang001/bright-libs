@@ -1,5 +1,5 @@
-#ifndef SKEWHEAP_HPP
-#define SKEWHEAP_HPP
+#ifndef BRIGHT_LIB_SKEWHEAP_HPP
+#define BRIGHT_LIB_SKEWHEAP_HPP
 #include <vector>
 #include <utility>
 #include <string>
@@ -153,4 +153,4 @@ public:
 
 } /* namespace bright_lib */
 
-#endif /* SKEWHEAP_HPP */
+#endif /* BRIGHT_LIB_SKEWHEAP_HPP */

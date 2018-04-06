@@ -1,5 +1,5 @@
-#ifndef SERDE_HPP
-#define SERDE_HPP
+#ifndef BRIGHT_LIB_SERDE_HPP
+#define BRIGHT_LIB_SERDE_HPP
 
 #include <string>
 #include <cstdio>
@@ -54,4 +54,4 @@ public:
 
 } /* namespace bright_lib */
 
-#endif /* SERDE_HPP */
+#endif /* BRIGHT_LIB_SERDE_HPP */

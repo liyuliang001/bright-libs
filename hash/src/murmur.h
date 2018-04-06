@@ -1,5 +1,5 @@
-#ifndef MURMUR_H
-#define MURMUR_H
+#ifndef BRIGHT_LIB_MURMUR_H
+#define BRIGHT_LIB_MURMUR_H
 
 #include <stdint.h>
 uint32_t murmur3_32(const uint8_t* key, size_t len, uint32_t seed) {
@@ -40,4 +40,4 @@ uint32_t murmur3_32(const uint8_t* key, size_t len, uint32_t seed) {
 	return h;
 }
 
-#endif /* MURMUR_H */
+#endif /* BRIGHT_LIB_MURMUR_H */

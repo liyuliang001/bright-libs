@@ -1,5 +1,5 @@
-#ifndef BRIGHT_LIB_STATS_UTIL_HPP
-#define BRIGHT_LIB_STATS_UTIL_HPP
+#ifndef BRIGHT_LIB__STATS_UTIL_HPP
+#define BRIGHT_LIB__STATS_UTIL_HPP
 #include <vector>
 #include <cmath>
 
@@ -44,4 +44,4 @@ double GetStd(const std::vector<T> &v){
 } /* namespace stats_util */
 } /* namespace bright_lib */
 
-#endif /* BRIGHT_LIB_STATS_UTIL_HPP */
+#endif /* BRIGHT_LIB__STATS_UTIL_HPP */

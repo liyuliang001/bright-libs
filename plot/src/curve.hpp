@@ -1,5 +1,5 @@
-#ifndef CURVE_HPP
-#define CURVE_HPP
+#ifndef BRIGHT_LIB__PLOT__CURVE_HPP
+#define BRIGHT_LIB__PLOT__CURVE_HPP
 
 #include <string>
 #include "base_type.hpp"
@@ -27,4 +27,4 @@ class Curve: public BaseType{
 
 } /* namespace plot */
 } /* namespace bright_lib */
-#endif /* CURVE_HPP */
+#endif /* BRIGHT_LIB__PLOT__CURVE_HPP */

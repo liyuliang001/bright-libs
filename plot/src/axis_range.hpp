@@ -1,5 +1,5 @@
-#ifndef AXIS_RANGE_HPP
-#define AXIS_RANGE_HPP
+#ifndef BRIGHT_LIB__PLOT__AXIS_RANGE_HPP
+#define BRIGHT_LIB__PLOT__AXIS_RANGE_HPP
 
 #include <string>
 
@@ -20,4 +20,4 @@ class AxisRange{
 
 } /* namespace plot */
 } /* namespace bright_lib */
-#endif /* AXIS_RANGE_HPP */
+#endif /* BRIGHT_LIB__PLOT__AXIS_RANGE_HPP */

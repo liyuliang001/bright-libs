@@ -1,5 +1,5 @@
-#ifndef FIGURE_HPP
-#define FIGURE_HPP
+#ifndef BRIGHT_LIB__PLOT__FIGURE_HPP
+#define BRIGHT_LIB__PLOT__FIGURE_HPP
 
 #include <string>
 #include <vector>
@@ -40,4 +40,4 @@ class Figure{
 
 } /* namespace plot */
 } /* namespace bright_lib */
-#endif /* FIGURE_HPP */
+#endif /* BRIGHT_LIB__PLOT__FIGURE_HPP */

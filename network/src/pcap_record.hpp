@@ -1,5 +1,5 @@
-#ifndef PCAP_RECORD_HPP
-#define PCAP_RECORD_HPP
+#ifndef BRIGHT_LIB_PCAP_RECORD_HPP
+#define BRIGHT_LIB_PCAP_RECORD_HPP
 #include "packet.hpp"
 namespace bright_lib{
 
@@ -15,4 +15,4 @@ class PcapRecord{
 }; /* class PcapRecord */
 
 } /* namespace bright_lib */
-#endif /* PCAP_RECORD_HPP */
+#endif /* BRIGHT_LIB_PCAP_RECORD_HPP */

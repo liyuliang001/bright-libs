@@ -1,5 +1,5 @@
-#ifndef COLOR_HPP
-#define COLOR_HPP
+#ifndef BRIGHT_LIB__PLOT__COLOR_HPP
+#define BRIGHT_LIB__PLOT__COLOR_HPP
 
 #include <string>
 
@@ -26,4 +26,4 @@ class Color{
 
 } /* namespace plot */
 } /* namespace bright_lib */
-#endif /* COLOR_HPP */
+#endif /* BRIGHT_LIB__PLOT__COLOR_HPP */

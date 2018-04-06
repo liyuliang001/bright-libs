@@ -1,5 +1,5 @@
-#ifndef PACKET_HPP
-#define PACKET_HPP
+#ifndef BRIGHT_LIB_PACKET_HPP
+#define BRIGHT_LIB_PACKET_HPP
 
 #include <netinet/if_ether.h>
 #include <netinet/ip.h>
@@ -38,4 +38,4 @@ public:
 
 } /* namespace bright_lib */
 
-#endif /* MY_PACKET_HPP */
+#endif /* BRIGHT_LIB_PACKET_HPP */

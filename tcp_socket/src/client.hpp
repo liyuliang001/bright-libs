@@ -1,5 +1,5 @@
-#ifndef BRIGHT_LIB_TCP_SOCKET_CLIENT_HPP
-#define BRIGHT_LIB_TCP_SOCKET_CLIENT_HPP
+#ifndef BRIGHT_LIB__TCP_SOCKET__CLIENT_HPP
+#define BRIGHT_LIB__TCP_SOCKET__CLIENT_HPP
 
 #include <stdint.h>
 #include <sys/socket.h>
@@ -24,4 +24,4 @@ public:
 }
 }
 
-#endif /* BRIGHT_LIB_TCP_SOCKET_CLIENT_HPP */
+#endif /* BRIGHT_LIB__TCP_SOCKET__CLIENT_HPP */

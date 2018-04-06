@@ -1,5 +1,5 @@
-#ifndef BASE_TYPE_HPP
-#define BASE_TYPE_HPP
+#ifndef BRIGHT_LIB__PLOT__BASE_TYPE_HPP
+#define BRIGHT_LIB__PLOT__BASE_TYPE_HPP
 
 #include <string>
 
@@ -13,4 +13,4 @@ class BaseType{
 
 } /* namespace plot */
 } /* namespace bright_lib */
-#endif /* BASE_TYPE_HPP */
+#endif /* BRIGHT_LIB__PLOT__BASE_TYPE_HPP */

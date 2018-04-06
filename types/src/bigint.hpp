@@ -1,5 +1,5 @@
-#ifndef BIGINT_HPP
-#define BIGINT_HPP
+#ifndef BRIGHT_LIB__TYPES__BIGINT_HPP
+#define BRIGHT_LIB__TYPES__BIGINT_HPP
 
 #include <stdint.h>
 #include <cstring>
@@ -167,4 +167,4 @@ namespace std{
 }
 #undef N_U64
 
-#endif /* BIGINT_HPP */
+#endif /* BRIGHT_LIB__TYPES__BIGINT_HPP */

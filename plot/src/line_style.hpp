@@ -1,5 +1,5 @@
-#ifndef LINE_STYLE_HPP
-#define LINE_STYLE_HPP
+#ifndef BRIGHT_LIB__PLOT__LINE_STYLE_HPP
+#define BRIGHT_LIB__PLOT__LINE_STYLE_HPP
 
 #include "color.hpp"
 
@@ -31,4 +31,4 @@ class LineStyle{
 
 } /* namespace plot */
 } /* namespace bright_lib */
-#endif /* LINE_STYLE_HPP */
+#endif /* BRIGHT_LIB__PLOT__LINE_STYLE_HPP */
