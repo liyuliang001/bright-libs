@@ -12,7 +12,6 @@ int Packet::parse_base(const unsigned char *buf, pcap_pkthdr &hdr, int has_l2){
 	int caplen = hdr.caplen;
 	ether_header *eth_hdr;
 	ip *ip_hdr;
-	tcphdr *tcp_hdr;
 	unsigned int IP_header_length;
 
 	if (has_l2){
@@ -41,34 +40,49 @@ int Packet::parse_base(const unsigned char *buf, pcap_pkthdr &hdr, int has_l2){
 	if (caplen < IP_header_length)
 		return 3;
 
-	if (ip_hdr->ip_p != IPPROTO_TCP)
-		return 4;
-
-	/* Skip over the IP header to get to the UDP header. */
-	buf += IP_header_length;
-	caplen -= IP_header_length;
-
-	if (caplen < sizeof(tcphdr))
-		return 5;
-
-	tcp_hdr = (tcphdr*) buf;
-
 	srcip = ip_hdr->ip_src;
 	dstip = ip_hdr->ip_dst;
 	sip = ntohl(srcip.s_addr);
 	dip = ntohl(dstip.s_addr);
-	sport = ntohs(tcp_hdr->source);
-	dport = ntohs(tcp_hdr->dest);
-	prot = ip_hdr->ip_p;
 	ipid = ntohs(ip_hdr->ip_id);
-	seq = ntohl(tcp_hdr->seq);
-	ack = ntohl(tcp_hdr->ack_seq);
-	flags = tcp_hdr->th_flags;
+	prot = ip_hdr->ip_p;
 	size = hdr.len;
-	dsize = size - sizeof(ether_header) - IP_header_length - tcp_hdr->doff * 4;
 	ip_size = ntohs(ip_hdr->ip_len);
 
-	return 0;
+	/* L4 header */
+	if (ip_hdr->ip_p == IPPROTO_TCP){
+		buf += IP_header_length;
+		caplen -= IP_header_length;
+
+		if (caplen < sizeof(tcphdr))
+			return 5;
+
+		tcphdr *tcp_hdr = (tcphdr*) buf;
+
+		sport = ntohs(tcp_hdr->source);
+		dport = ntohs(tcp_hdr->dest);
+		seq = ntohl(tcp_hdr->seq);
+		ack = ntohl(tcp_hdr->ack_seq);
+		flags = tcp_hdr->th_flags;
+		dsize = ip_size - IP_header_length - tcp_hdr->doff * 4;
+
+		return 0;
+	}else if (ip_hdr->ip_p == IPPROTO_UDP){
+		buf += IP_header_length;
+		caplen -= IP_header_length;
+
+		if (caplen < sizeof(udphdr))
+			return 5;
+
+		udphdr *udp_hdr = (udphdr*) buf;
+
+		sport = ntohs(udp_hdr->source);
+		dport = ntohs(udp_hdr->dest);
+		dsize = ntohs(udp_hdr->len) - 8;
+
+		return 0;
+	}else 
+		return 4;
 }
 
 int Packet::parse(const unsigned char *buf, pcap_pkthdr &hdr){
