@@ -27,7 +27,9 @@ public:
 	uint8_t flags;
 	uint16_t dsize, ip_size;
 
+	int parse_base(const unsigned char *packet, pcap_pkthdr &hdr, int has_l2);
 	int parse(const unsigned char *packet, pcap_pkthdr &hdr);
+	int parse_no_l2(const unsigned char *packet, pcap_pkthdr &hdr);
 	void serialize(Serializer &ser) const;
 	void deserialize(Deserializer &des);
 	std::string to_str() const;

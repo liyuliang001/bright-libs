@@ -10,8 +10,14 @@ double PcapRecord::get_ts_double() const{
 int PcapRecord::parse(const unsigned char *buf, pcap_pkthdr &hdr)
 {
     ts = hdr.ts;
-	packet.parse(buf, hdr);
-    return 0;
+	int err = packet.parse(buf, hdr);
+	return err;
+}
+
+int PcapRecord::parse_no_l2(const unsigned char *buf, pcap_pkthdr &hdr){
+    ts = hdr.ts;
+	int err = packet.parse_no_l2(buf, hdr);
+	return err;
 }
 
 string PcapRecord::to_str() const{

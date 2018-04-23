@@ -8,23 +8,26 @@
 using namespace std;
 
 namespace bright_lib{
-int Packet::parse(const unsigned char *buf, pcap_pkthdr &hdr)
-{
+int Packet::parse_base(const unsigned char *buf, pcap_pkthdr &hdr, int has_l2){
 	int caplen = hdr.caplen;
 	ether_header *eth_hdr;
 	ip *ip_hdr;
 	tcphdr *tcp_hdr;
 	unsigned int IP_header_length;
 
-	/* For simplicity, we assume Ethernet encapsulation. */
-	if (caplen < sizeof(ether_header))
-		return 1;
+	if (has_l2){
+		/* For simplicity, we assume Ethernet encapsulation. */
+		if (caplen < sizeof(ether_header))
+			return 1;
 
-	eth_hdr = (ether_header*) buf;
+		eth_hdr = (ether_header*) buf;
+		memcpy(dmac, eth_hdr->ether_dhost, 6);
+		memcpy(smac, eth_hdr->ether_shost, 6);
 
-	/* Skip over the Ethernet header. */
-	buf += sizeof(ether_header);
-	caplen -= sizeof(ether_header);
+		/* Skip over the Ethernet header. */
+		buf += sizeof(ether_header);
+		caplen -= sizeof(ether_header);
+	}
 
 	/* Didn't capture a full IP header */
 	if (caplen < sizeof(ip))
@@ -50,8 +53,6 @@ int Packet::parse(const unsigned char *buf, pcap_pkthdr &hdr)
 
 	tcp_hdr = (tcphdr*) buf;
 
-	memcpy(dmac, eth_hdr->ether_dhost, 6);
-	memcpy(smac, eth_hdr->ether_shost, 6);
 	srcip = ip_hdr->ip_src;
 	dstip = ip_hdr->ip_dst;
 	sip = ntohl(srcip.s_addr);
@@ -68,6 +69,14 @@ int Packet::parse(const unsigned char *buf, pcap_pkthdr &hdr)
 	ip_size = ntohs(ip_hdr->ip_len);
 
 	return 0;
+}
+
+int Packet::parse(const unsigned char *buf, pcap_pkthdr &hdr){
+	return parse_base(buf, hdr, 1);
+}
+
+int Packet::parse_no_l2(const unsigned char *buf, pcap_pkthdr &hdr){
+	return parse_base(buf, hdr, 0);
 }
 
 void Packet::serialize(Serializer &ser) const {
