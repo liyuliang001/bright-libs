@@ -41,6 +41,29 @@ double GetStd(const std::vector<T> &v){
 	return sqrt(var);
 }
 
+template <class T>
+class SetStat{
+public:
+	std::vector<T> v;
+	bool sorted;
+
+	SetStat() : sorted(false) {}
+	void add(T x){
+		sorted &= (v.size() == 0 || v.back() <= x);
+		v.push_back(x);
+	}
+	double get_pct(double pct){ 
+		if (!sorted){
+			sort(v.begin(), v.end());
+			sorted = true;
+		}
+		return GetPercentile(v, pct);
+	}
+	double get_mean() { return GetMean(v);}
+	double get_var() { return GetVar(v);}
+	double get_std() { return GetStd(v);}
+};
+
 } /* namespace stats_util */
 } /* namespace bright_lib */
 
