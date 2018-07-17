@@ -32,13 +32,6 @@ public:
 		root = none;
 	}
 	Bst(const Bst &bst); // disable copy constructor
-	void clear(BstNode<T> *p){
-		if (p == none)
-			return;
-		clear(p->son[0]);
-		clear(p->son[1]);
-		delete p;
-	}
 	~Bst(){
 		clear(root);
 		delete none;
@@ -100,6 +93,18 @@ public:
 	}
 	void remove(const T &data){
 		root = remove(root, data);
+	}
+
+	void clear(BstNode<T> *p){
+		if (p == none)
+			return;
+		clear(p->son[0]);
+		clear(p->son[1]);
+		delete p;
+	}
+	void clear(){
+		clear(root);
+		root = none;
 	}
 
 	// return the number of data < x in p
