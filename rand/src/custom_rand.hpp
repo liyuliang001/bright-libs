@@ -36,6 +36,12 @@ public:
 			s += (p[i].x + p[i-1].x) * (p[i].y - p[i-1].y) / 2;
 		return s / 100;
 	}
+	double get_max(){
+		return p.back().x;
+	}
+	double get_min(){
+		return p[0].x;
+	}
 };
 
 class CustomRand{
