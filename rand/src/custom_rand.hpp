@@ -26,7 +26,7 @@ public:
 		if (p.back().y != 100)
 			return false;
 		for (int i = 1; i < p.size(); i++)
-			if (p[i-1].x >= p[i].x || p[i-1].y >= p[i].y)
+			if (p[i-1].x > p[i].x || p[i-1].y > p[i].y)
 				return false;
 		return true;
 	}
