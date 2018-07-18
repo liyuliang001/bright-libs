@@ -106,14 +106,16 @@ public:
 		root = none;
 	}
 
+	// get the i-th node, i should be in [0, n-1]
+	// think in this way: there should be i nodes less than the returned one
 	BstNode<T>* get_i_th_node(BstNode<T> *p, int64_t i){
 		if (p == none)
 			return none;
 		int64_t l_cnt = p->son[0]->count;
-		if (l_cnt >= i)
-			return get_i_th_node(p->son[0], i);
-		if (l_cnt + 1 == i)
+		if (l_cnt == i)
 			return p;
+		if (l_cnt > i)
+			return get_i_th_node(p->son[0], i);
 		return get_i_th_node(p->son[1], i - l_cnt - 1);
 	}
 	BstNode<T>* get_i_th_node(int64_t i){
