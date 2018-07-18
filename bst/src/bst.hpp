@@ -107,6 +107,23 @@ public:
 		root = none;
 	}
 
+	BstNode<T>* get_i_th_node(BstNode<T> *p, int64_t i){
+		if (p == none)
+			return none;
+		int64_t l_cnt = p->son[0]->count;
+		if (l_cnt >= i)
+			return get_i_th_node(p->son[0], i);
+		if (l_cnt + 1 == i)
+			return p;
+		return get_i_th_node(p->son[1], i - l_cnt - 1);
+	}
+	BstNode<T>* get_i_th_node(int64_t i){
+		return get_i_th_node(root, i);
+	}
+	T get_i_th_data(int64_t i){
+		return get_i_th_node(i)->data;
+	}
+
 	// return the number of data < x in p
 	int64_t count_smaller(BstNode<T> *p, const T &x){
 		if (p == none)
