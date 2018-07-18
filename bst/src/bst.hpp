@@ -9,7 +9,6 @@
 namespace bright_lib{
 
 template <class T>
-
 class BstNode{
 public:
 	T data;
@@ -17,8 +16,8 @@ public:
 	int64_t count;
 	uint32_t rd;
 
-	BstNode() : parent(NULL), count(0) { son[0] = son[1] = NULL; rd = rand();}
-	BstNode(const T &_data) : data(_data), parent(NULL), count(1) { son[0] = son[1] = NULL; rd = rand();}
+	BstNode() : parent(NULL), count(0) { son[0] = son[1] = NULL; rd = ::rand();}
+	BstNode(const T &_data) : data(_data), parent(NULL), count(1) { son[0] = son[1] = NULL; rd = ::rand();}
 };
 
 template <class T> 
