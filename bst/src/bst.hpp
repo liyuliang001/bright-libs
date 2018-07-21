@@ -125,6 +125,9 @@ public:
 		return get_i_th_node(i)->data;
 	}
 
+	int64_t count(){
+		return root->count;
+	}
 	// return the number of data < x in p
 	int64_t count_smaller(BstNode<T> *p, const T &x){
 		if (p == none)
