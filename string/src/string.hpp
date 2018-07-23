@@ -52,6 +52,9 @@ static inline std::vector<std::string> split(std::string s, const char *delim){
 	}
 	return res;
 }
+static inline std::vector<std::string> split_by_space(const std::string &s){
+	return split(s, " \t\n\v\f\r");
+}
 
 }
 
