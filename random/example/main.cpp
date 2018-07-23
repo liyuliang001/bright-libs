@@ -1,28 +1,20 @@
-#include <cstdio>
-#include <algorithm>
+#include <vector>
 #include <bright_lib/random/rand.hpp>
 
 using namespace std;
 using namespace bright_lib::random;
 
 int main(){
-	CustomRand r;
-	r.cdf.add(0.0,0.0);
-	r.cdf.add(6, 50.0);
-	r.cdf.add(8, 100.0);
-	if (!r.test_cdf()){
-		printf("invalid cdf\n");
-		return -1;
-	}
-	printf("avg: %lf\n", r.cdf.get_avg());
-	vector<double> x;
-	for (int i = 0; i < 100; i++)
-		x.push_back(r.rand());
-	sort(x.begin(), x.end());
-	for (int i = 0; i < 100; i++){
-		printf("%lf ", x[i]);
-		for (int j = 0; j < x[i] * 5; j ++)
-			printf("*");
-		printf("\n");
+	vector<Distribution<double>*> d;
+	d.push_back(new NormalDistribution<double>(-5, 2));
+	d.push_back(new ExponentialDistribution<double>(0.1));
+	d.push_back(new UniformRealDistribution<double>(0, 100));
+	Cdf cdf;
+	cdf.add(0,0);
+	cdf.add(50,10);
+	cdf.add(100,100);
+	d.push_back(new CustomDistribution<double>(cdf));
+	for (auto p : d){
+		printf("%lf\n", (*p)());
 	}
 }

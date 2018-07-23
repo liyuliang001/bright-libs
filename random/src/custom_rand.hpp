@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <cassert>
+#include <random>
 #include "rand_double.hpp"
 
 namespace bright_lib{
@@ -44,18 +45,29 @@ public:
 	}
 };
 
+template<typename RetType = double>
 class CustomRand{
 public:
 	Cdf cdf;
 
+	CustomRand(){}
+	CustomRand(Cdf _cdf){ cdf = _cdf;}
 	bool test_cdf(){ return cdf.test();}
-	double rand(){
-		double r = rand_double() * 100;
+	bool set_cdf(Cdf _cdf){ cdf = _cdf;}
+	RetType rand(double r){
 		for (int i = 1; i < cdf.p.size(); i++){
 			if (r <= cdf.p[i].y)
 				return cdf.p[i-1].x + (cdf.p[i].x - cdf.p[i-1].x) / (cdf.p[i].y - cdf.p[i-1].y) * (r - cdf.p[i-1].y);
 		}
 		assert(0);
+	}
+	RetType rand(){
+		double r = rand_double() * 100;
+		return rand(r);
+	}
+	template<class URNG>
+	RetType operator()(URNG& g){
+		return rand((g() - g.min()) / double(g.max() - g.min()) * 100);
 	}
 };
 

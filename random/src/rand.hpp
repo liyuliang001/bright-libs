@@ -3,5 +3,6 @@
 
 #include "rand_double.hpp"
 #include "custom_rand.hpp"
+#include "distribution.hpp"
 
 #endif /* _BRIGHT_LIB__RAND__RAND_HPP */
