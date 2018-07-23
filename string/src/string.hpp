@@ -44,11 +44,10 @@ static inline std::string trim_copy(std::string s) {
     return s;
 }
 
-static inline std::vector<std::string> split(const std::string &s, const char *delim){
+static inline std::vector<std::string> split(std::string s, const char *delim){
 	std::vector<std::string> res;
-	std::string buf = s;
 	char* saveptr;
-	for (char* tok = strtok_r(&buf[0], delim, &saveptr); tok; tok = strtok_r(NULL, delim, &saveptr)){
+	for (char* tok = strtok_r(&s[0], delim, &saveptr); tok; tok = strtok_r(NULL, delim, &saveptr)){
 		res.push_back(tok);
 	}
 	return res;
