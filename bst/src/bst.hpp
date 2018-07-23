@@ -30,7 +30,23 @@ public:
 		none->son[0] = none->son[1] = none;
 		root = none;
 	}
-	Bst(const Bst &bst); // disable copy constructor
+	BstNode<T>* copy(BstNode<T>* p, const Bst &bst, const BstNode<T>* p_from){
+		if (p_from == bst.none)
+			return none;
+		p = new BstNode<T>(p_from->data);
+		p->count = p_from->count;
+		p->rd = p_from->rd;
+		p->son[0] = copy(p->son[0], bst, p_from->son[0]);
+		p->son[1] = copy(p->son[1], bst, p_from->son[1]);
+		return p;
+	}
+	Bst(const Bst &bst){
+		none = new BstNode<T>();
+		none->son[0] = none->son[1] = none;
+		none->rd = bst.none->rd;
+		root = copy(root, bst, bst.root);
+	}
+	void operator=(const Bst &bst); // disable assignment
 	~Bst(){
 		clear(root);
 		delete none;
