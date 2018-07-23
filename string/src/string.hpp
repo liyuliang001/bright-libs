@@ -26,11 +26,29 @@ static inline void trim(std::string &s) {
 	rtrim(s);
 }
 
-static inline std::vector<std::string> split(std::string &s, const char *delim){
+// trim from start (copying)
+static inline std::string ltrim_copy(std::string s) {
+    ltrim(s);
+    return s;
+}
+
+// trim from end (copying)
+static inline std::string rtrim_copy(std::string s) {
+    rtrim(s);
+    return s;
+}
+
+// trim from both ends (copying)
+static inline std::string trim_copy(std::string s) {
+    trim(s);
+    return s;
+}
+
+static inline std::vector<std::string> split(const std::string &s, const char *delim){
 	std::vector<std::string> res;
+	std::string buf = s;
 	char* saveptr;
-	char* str = &s[0];
-	for (char* tok = strtok_r(str, delim, &saveptr); tok; tok = strtok_r(NULL, delim, &saveptr)){
+	for (char* tok = strtok_r(&buf[0], delim, &saveptr); tok; tok = strtok_r(NULL, delim, &saveptr)){
 		res.push_back(tok);
 	}
 	return res;
