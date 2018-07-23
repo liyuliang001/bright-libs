@@ -11,4 +11,4 @@ install : $(INSTALL_INCLUDE_DIR)
 	make install -C skewheap
 	make install -C stats_util
 	make install -C bst
-	make install -C rand
+	make install -C random

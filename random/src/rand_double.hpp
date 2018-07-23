@@ -4,7 +4,7 @@
 #include <cstdlib>
 
 namespace bright_lib{
-namespace rand{
+namespace random{
 
 static inline double rand_double(){
 	return ::rand() / double(RAND_MAX);

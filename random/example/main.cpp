@@ -1,9 +1,9 @@
 #include <cstdio>
 #include <algorithm>
-#include <bright_lib/rand/rand.hpp>
+#include <bright_lib/random/rand.hpp>
 
 using namespace std;
-using namespace bright_lib::rand;
+using namespace bright_lib::random;
 
 int main(){
 	CustomRand r;

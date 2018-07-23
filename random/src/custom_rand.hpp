@@ -6,7 +6,7 @@
 #include "rand_double.hpp"
 
 namespace bright_lib{
-namespace rand{
+namespace random{
 
 class Cdf{
 public:
@@ -59,7 +59,7 @@ public:
 	}
 };
 
-} /* namespace rand */
+} /* namespace random */
 } /* namespace bright_lib */
 
 #endif /* _BRIGHT_LIB__RAND__CUSTOM_RAND_HPP */
