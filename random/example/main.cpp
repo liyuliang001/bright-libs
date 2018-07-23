@@ -9,11 +9,7 @@ int main(){
 	d.push_back(new NormalDistribution<double>(-5, 2));
 	d.push_back(new ExponentialDistribution<double>(0.1));
 	d.push_back(new UniformRealDistribution<double>(0, 100));
-	Cdf cdf;
-	cdf.add(0,0);
-	cdf.add(50,10);
-	cdf.add(100,100);
-	d.push_back(new CustomDistribution<double>(cdf));
+	d.push_back(new CustomDistribution<double>("cdf.txt"));
 	for (auto p : d){
 		printf("%lf\n", (*p)());
 	}

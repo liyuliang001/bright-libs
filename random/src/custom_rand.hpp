@@ -4,6 +4,8 @@
 #include <vector>
 #include <cassert>
 #include <random>
+#include <cstdio>
+#include <string>
 #include "rand_double.hpp"
 
 namespace bright_lib{
@@ -18,6 +20,27 @@ public:
 	};
 	std::vector<Point> p;
 
+	Cdf(){}
+	Cdf(const std::string &filename){
+		parse_file(filename);
+	}
+
+	/* Parse a cdf file.
+	 * Format:
+	 *   x0 0
+	 *   x1 y1
+	 *   ...
+	 *   x(n-1) y(n-1)
+	 *   xn 100
+	 */
+	void parse_file(const std::string &filename){
+		FILE *file = fopen(filename.c_str(), "r");
+		p.clear();
+		for (double x, y; fscanf(file, "%lf%lf", &x, &y) != EOF; ){
+			add(x, y);
+		}
+		fclose(file);
+	}
 	void add(double x, double y){ p.emplace_back(x, y);}
 	bool test(){
 		if (p.size() < 2)
@@ -51,6 +74,7 @@ public:
 	Cdf cdf;
 
 	CustomRand(){}
+	CustomRand(const std::string &cdf_filename) : cdf(cdf_filename) {}
 	CustomRand(Cdf _cdf){ cdf = _cdf;}
 	bool test_cdf(){ return cdf.test();}
 	bool set_cdf(Cdf _cdf){ cdf = _cdf;}

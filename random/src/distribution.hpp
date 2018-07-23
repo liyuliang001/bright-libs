@@ -56,6 +56,7 @@ class CustomDistribution : public Distribution<RetType>{
 public:
 	CustomRand<RetType> distr;
 	CustomDistribution(){}
+	CustomDistribution(const std::string &cdf_filename) : distr(cdf_filename) {}
 	CustomDistribution(Cdf _cdf) : distr(_cdf){}
 	RetType operator()(){
 		return distr(this->generator);
