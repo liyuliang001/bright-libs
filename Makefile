@@ -12,3 +12,4 @@ install : $(INSTALL_INCLUDE_DIR)
 	make install -C stats_util
 	make install -C bst
 	make install -C random
+	make install -C string
