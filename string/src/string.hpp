@@ -44,16 +44,13 @@ static inline std::string trim_copy(std::string s) {
     return s;
 }
 
-static inline std::vector<std::string> split(std::string s, const char *delim){
+static inline std::vector<std::string> split(std::string s, const char *delim = " \t\n\v\f\r"){
 	std::vector<std::string> res;
 	char* saveptr;
 	for (char* tok = strtok_r(&s[0], delim, &saveptr); tok; tok = strtok_r(NULL, delim, &saveptr)){
 		res.push_back(tok);
 	}
 	return res;
-}
-static inline std::vector<std::string> split_by_space(const std::string &s){
-	return split(s, " \t\n\v\f\r");
 }
 
 }
