@@ -11,6 +11,6 @@ int main(){
 	d.push_back(new UniformRealDistribution<double>(0, 100));
 	d.push_back(new CustomDistribution<double>("cdf.txt"));
 	for (auto p : d){
-		printf("%lf\n", (*p)());
+		printf("%lf %lf\n", p->get_mean(), (*p)());
 	}
 }

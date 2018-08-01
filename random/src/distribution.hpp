@@ -19,48 +19,52 @@ public:
 		generator.seed(ts.tv_nsec);
 	}
 	virtual RetType operator()() = 0;
+	virtual RetType get_mean() = 0;
 };
 
 template<typename RetType = double>
 class NormalDistribution : public Distribution<RetType>{
 public:
+	RetType mean, std;
 	std::normal_distribution<RetType> distr;
-	NormalDistribution(RetType mean = 0.0, RetType std = 1.0) : distr(mean, std) {}
-	RetType operator()(){
-		return distr(this->generator);
-	}
+
+	NormalDistribution(RetType _mean = 0.0, RetType _std = 1.0) : mean(_mean), std(_std), distr(_mean, _std) {}
+	RetType operator()(){ return distr(this->generator);}
+	RetType get_mean(){ return mean;}
 };
 
 template<typename RetType = double>
 class ExponentialDistribution : public Distribution<RetType>{
 public:
+	RetType lambda;
 	std::exponential_distribution<RetType> distr;
-	ExponentialDistribution(RetType lambda = 1.0) : distr(lambda){}
-	RetType operator()(){
-		return distr(this->generator);
-	}
+
+	ExponentialDistribution(RetType _lambda = 1.0) : lambda(_lambda), distr(_lambda){}
+	RetType operator()(){ return distr(this->generator);}
+	RetType get_mean(){ return 1.0 / lambda;}
 };
 
 template<typename RetType = double>
 class UniformRealDistribution : public Distribution<RetType>{
 public:
+	RetType a, b;
 	std::uniform_real_distribution<RetType> distr;
-	UniformRealDistribution(RetType a = 0.0, RetType b = 1.0) : distr(a, b){}
-	RetType operator()(){
-		return distr(this->generator);
-	}
+
+	UniformRealDistribution(RetType _a = 0.0, RetType _b = 1.0) : a(_a), b(_b), distr(_a, _b){}
+	RetType operator()(){ return distr(this->generator);}
+	RetType get_mean(){ return (a + b) / 2;}
 };
 
 template<typename RetType = double>
 class CustomDistribution : public Distribution<RetType>{
 public:
 	CustomRand<RetType> distr;
+
 	CustomDistribution(){}
 	CustomDistribution(const std::string &cdf_filename) : distr(cdf_filename) {}
 	CustomDistribution(Cdf _cdf) : distr(_cdf){}
-	RetType operator()(){
-		return distr(this->generator);
-	}
+	RetType operator()(){ return distr(this->generator);}
+	RetType get_mean(){ return distr.cdf.get_avg();}
 };
 
 } /* namespace random */
