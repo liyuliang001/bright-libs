@@ -21,11 +21,15 @@ int PcapRecord::parse_no_l2(const unsigned char *buf, pcap_pkthdr &hdr){
 }
 
 string PcapRecord::to_str() const{
-	return packet.to_str() + "," + to_string(ts.tv_sec) + "." + to_string(ts.tv_usec);
+	char buf[128];
+	sprintf(buf, "%s,%lu.%06lu", packet.to_str().c_str(), ts.tv_sec, ts.tv_usec);
+	return buf;
 }
 
 string PcapRecord::to_readable() const {
-	return to_string(ts.tv_sec) + "." + to_string(ts.tv_usec) + " " + packet.to_readable();
+	char buf[128];
+	sprintf(buf, "%lu.%06lu %s", ts.tv_sec, ts.tv_usec, packet.to_str().c_str());
+	return buf;
 }
 
 } /* namespace bright_lib */
