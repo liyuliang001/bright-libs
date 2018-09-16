@@ -50,6 +50,8 @@ public:
 		server_addr.sin_family = AF_INET;
 		server_addr.sin_addr.s_addr = INADDR_ANY;
 		server_addr.sin_port = htons(port);
+		int opt = 1;
+		setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
 		if (bind(sockfd, (sockaddr *) &server_addr, sizeof(server_addr)) < 0)
 			return -2;
 		::listen(sockfd, n_concurrent);
